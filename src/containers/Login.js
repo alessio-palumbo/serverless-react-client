@@ -5,6 +5,7 @@ import { useAppContext } from "../libs/contextLib";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import LoaderButton from "../components/LoaderButton";
+import { onError } from "../libs/errorLib";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +29,7 @@ export default function Login() {
       userHasAuthenticated(true);
       history.push("/")
     } catch (e) {
-      alert(e.message);
+      onError(e);
       setIsLoading(false);
     }
   }
