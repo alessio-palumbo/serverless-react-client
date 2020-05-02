@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { Auth } from "aws-amplify";
@@ -10,6 +10,8 @@ import "./App.css";
 function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  const history = useHistory();
 
   // Load session on first render only to check if user is already logged in
   useEffect(() => {
@@ -33,6 +35,7 @@ function App() {
     await Auth.signOut();
 
     userHasAuthenticated(false);
+    history.push("/login");
   }
 
   return (
